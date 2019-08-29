@@ -1,0 +1,5 @@
+/*
+ * Prototype build
+*/
+
+package gogun

@@ -6,9 +6,7 @@
 //https://gowebexamples.com/json/
 //https://www.sohamkamani.com/blog/2017/10/18/parsing-json-in-golang/
 //https://stackoverflow.com/questions/14289256/cannot-convert-data-type-interface-to-type-string-need-type-assertion
-
-
-
+//https://stackoverflow.com/questions/37011799/how-to-pass-a-child-struct-into-a-function-accepting-parent-struct
 package gogun
 
 import (
@@ -53,14 +51,22 @@ func writefiledata(){
 }
 
 var dup DupI
+var store StoreI
 
 func init(){
 	fmt.Println("func init")
-	dup = Dup{}
+	dup := Dup{}
 	//fmt.Println(dup)
 	//fmt.Println(dup.opt.max) // nope
 	dup.optdefault()
-	//dup.check()
+
+	store := Store{}//work
+	//store = Store{opt:{file:"radata"}} //nope
+	store.setFile("radata")
+	store.opt.file = "radata"
+	//store.put("radataa","test",nil)
+	store.put("","test",nil)
+
 	start := time.Now()
 	fmt.Println(start)
 }
