@@ -6,7 +6,10 @@
  * check dup
 
 # Information:
- Note this is prototype test. Golang is base on type struct and interface build. Javascript function are not same format in golang. It coded in different way a bit. It will take a while to copy or clone gunjs in simple format.
+ This is gun.go prototype port from gun.js.
+ It is base on https://www.youtube.com/watch?v=5fCPRY-9hkc.
+ 
+ Golang is base on type struct and interface build as well different way to setup packages. Javascript and golang code language have different format. It coded in different way a bit. It will take a while to copy or clone gunjs in simple format.
 
 # Notes:
  * Upper case first character letter is public function call.
@@ -27,10 +30,16 @@ import (
 func main() {
 
     fmt.Println("gun setup...")
-
+    //this is just a test package.
     var Gun gogun.GunI = gogun.Gun{}
     Gun.Test()
     
 }
 ```
 Simple entry point to main
+
+# setup: 
+```
+go get github.com/lightnet/gogun
+go get github.com/lightnet/gohttpgunjs
+```
