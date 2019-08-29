@@ -1,9 +1,14 @@
 # gogun
 
-# Status:
+# Status / Features:
  * Idea design prototype
- * write/read file
- * check dup
+ * write/read file (simple test)
+ * check dup (simple one part function)
+ * radisk (not yet build)
+ * radix (not yet build)
+ * ham (not yet build)
+ * store (simple test)
+ * websocket (simple send / receive )
 
 # Information:
  This is gun.go prototype port from gun.js.
@@ -15,8 +20,7 @@
  * Upper case first character letter is public function call.
  * Lower case first character letter is private function call.
  * There no class and constructor which will be hard to setup. That is different way to setup from information that I search around a bit. It work in progress test.
- * pacakge in group in files will able to call function to other ones that share if package is same location.
-
+ * pacakge in group in files will able to call function to other ones that share if package is same location folder.
 
 main.go
 ```go
@@ -43,3 +47,11 @@ Simple entry point to main
 go get github.com/lightnet/gogun
 go get github.com/lightnet/gohttpgunjs
 ```
+
+```go
+msg["#"] // tricky to get '#'
+msg["_"] //
+```
+Json format will take a while to get part of the gun work in golang.
+
+callback function setup differently a bit of challenge.
