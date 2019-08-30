@@ -13,9 +13,9 @@ import (
 	"fmt"
 	"encoding/json"
 	"net/http"
-	"io/ioutil"
+	//"io/ioutil"
 	"github.com/gorilla/websocket"
-	"time"
+	//"time"
 )
 //===============================================
 // Web Sokcet Config
@@ -26,29 +26,7 @@ var upgrader = websocket.Upgrader{
 
 //===============================================
 // Test
-func readfiledata(){
-	// read in the contents of the localfile.data
-	data, err := ioutil.ReadFile("localfile.data")
-	// if our program was unable to read the file
-	// print out the reason why it can't
-	if err != nil {
-		fmt.Println(err)
-	}
- 
-	// if it was successful in reading the file then
-	// print out the contents as a string
-	fmt.Print(string(data))
-}
-func writefiledata(){
-	mydata := []byte("all my data I want to write to a file")
-	// the WriteFile method returns an error if unsuccessful
-	err := ioutil.WriteFile("localfile.data", mydata, 0777)
-	// handle this error
-	if err != nil {
-  		// print it out
-  		fmt.Println(err)
-	}
-}
+
 
 var dup DupI
 var store StoreI
@@ -60,28 +38,32 @@ func init(){
 	//fmt.Println(dup.opt.max) // nope
 	dup.optdefault()
 
-	store := Store{}//work
-	//store = Store{opt:{file:"radata"}} //nope
-	store.setFile("radata")
-	store.opt.file = "radata"
-	//store.put("radataa","test",nil)
-	store.put("","test",nil)
-
-	start := time.Now()
-	fmt.Println(start)
+	//store := Store{}//work
+	store := Store{
+		Opt: InmemOpt{
+			File:"radata",
+		},
+	} 
+	store.GetOpt()
+	//store.setFile("radata")
+	//store.Opt.File = "radata"
+	store.put("radataa","test",nil)//works
+	//store.put("","test",nil)//works
+	//start := time.Now()
+	//fmt.Println(start)
 }
-
-
 //===============================================
 // GUN FUNC's
 
 var graph interface{}
 
 type GunI interface {
+	back()
 	Get()
 	Map()
 	Put()
 	Once()
+	ToJSON()
 	Test() string
 }
 
@@ -90,6 +72,10 @@ var peers []string
 //https://forum.golangbridge.org/t/solved-map-string-interface-best-practice/5457
 type Gun []map[string]interface{}
 //func (csvd CSVDatum ) ToString() string  {...}
+
+func (g Gun) back() {
+	fmt.Println("func Get")
+}
 
 func (g Gun) Get() {
 	fmt.Println("func Get")
@@ -107,21 +93,16 @@ func (g Gun) Once() {
 	fmt.Println("func Once")
 }
 
+func (g Gun) ToJSON() {
+	fmt.Println("func toJSON")
+}
+
 func (g Gun) Test() string{
 	fmt.Println("func Test")
   	return "test"
 }
-
-func Test(a, b int) int {
-	return a - b
-}
-
-func Add(a, b int) int {
-	return a + b
-}
 //===============================================
 // Web Server
-
 func WSEndpoint(w http.ResponseWriter, r *http.Request) {
 	conn, _ := upgrader.Upgrade(w, r, nil) // error ignored for sake of simplicity
 	

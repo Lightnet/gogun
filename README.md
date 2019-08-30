@@ -49,7 +49,7 @@ go get github.com/lightnet/gohttpgunjs
 ```
 
 ```go
-msg["#"] // tricky to get '#'
+msg["#"] // tricky to get '#' golang format
 msg["_"] //
 ```
 Json format will take a while to get part of the gun work in golang.

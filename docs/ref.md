@@ -6,12 +6,12 @@
  * https://www.openmymind.net/Introduction-To-Go-Structures-Data-Instances/
  * https://medium.com/rungo/interfaces-in-go-ab1601159b3a
  * https://medium.com/rungo/everything-you-need-to-know-about-packages-in-go-b8bac62b74cc
- * 
- * 
- * 
- * 
- * 
- * 
+ * https://medium.com/rungo/structures-in-go-76377cc106a2
+ * https://play.golang.org/p/Np7Y8LuOdql
+ * https://stackoverflow.com/questions/42303611/go-function-types-that-return-structs-being-used-with-interfaces
+ * https://play.golang.org/p/wELpmo204Y
+ * https://nathanleclaire.com/blog/2015/03/09/youre-not-using-this-enough-part-one-go-interfaces/
+ * http://aquaraga.github.io/functional-programming/golang/2016/11/19/golang-interfaces-vs-functions.html
  * 
  * 
  * 

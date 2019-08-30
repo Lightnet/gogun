@@ -16,12 +16,28 @@ type StoreI interface{
 	get(file string, cb interface{})
 	list(cb interface{})
 	setFile(file string)
+	GetOpt()
+}
+
+type OptConfig interface{
+	Get() string
+	Set(value string)
+}
+
+type InmemOpt struct{
+	File string
+}
+
+func (o InmemOpt) Get() string{
+	return o.File;
+}
+
+func (o InmemOpt) Set(value string){
+	o.File = value;
 }
 
 type Store struct{
-	opt struct{
-		file string
-	}
+	Opt OptConfig
 }
 
 func (s Store) put(file string, data string, cb interface{}){
@@ -31,7 +47,7 @@ func (s Store) put(file string, data string, cb interface{}){
 		filename = file
 	}else{
 		fmt.Println("default")	
-		filename = s.opt.file
+		filename = s.Opt.Get()
 	}
 	fmt.Println(filename)
 	mydata := []byte(data)
@@ -45,8 +61,16 @@ func (s Store) put(file string, data string, cb interface{}){
 }
 
 func (s Store) get(file string, cb interface{}){
+	filename := ""
+	if len(file) > 0{
+		fmt.Println("call")
+		filename = file
+	}else{
+		fmt.Println("default")	
+		filename = s.Opt.Get()
+	}
 	// read in the contents of the localfile.data
-	data, err := ioutil.ReadFile(s.opt.file)
+	data, err := ioutil.ReadFile(filename)
 	// if our program was unable to read the file
 	// print out the reason why it can't
 	if err != nil {
@@ -55,6 +79,7 @@ func (s Store) get(file string, cb interface{}){
 	// if it was successful in reading the file then
 	// print out the contents as a string
 	fmt.Print(string(data))
+	
 }
 //https://stackoverflow.com/questions/14668850/list-directory-in-go
 func (s Store) list(cb interface{}){
@@ -68,6 +93,11 @@ func (s Store) list(cb interface{}){
 }
 
 func (s Store) setFile(file string){
-	s.opt.file = file
+	s.Opt.Set(file)
 	fmt.Println(file)
+}
+
+func (s Store) GetOpt(){
+	fmt.Println("s.Opt.Get()")
+	fmt.Println(s.Opt.Get())
 }
