@@ -115,13 +115,25 @@ func WSEndpoint(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			return
 		}
+		fmt.Println("incoming msg")
 		
 		json.Unmarshal([]byte(msg), &myMsg)
 		//fmt.Println( myMsg["#"])//works
 		fmt.Println( msgType)//works
 		//id := myMsg['#']
 		//https://stackoverflow.com/questions/14289256/cannot-convert-data-type-interface-to-type-string-need-type-assertion
-		dup.check(fmt.Sprint(myMsg["#"]))
+		//dup.check(fmt.Sprint(myMsg["#"]))
+		
+
+		if val, ok := myMsg["get"]; ok {
+			//do something here
+			fmt.Println("get found!",val)//works
+		}
+
+		if val, ok := myMsg["put"]; ok {
+			//do something here
+			fmt.Println("put found!",val)//works
+		}
 
 		/*
 		for k, v := range myMsg {
